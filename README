@@ -3,8 +3,38 @@ Requirements for this assessment is uploaded in the google drive and can be acce
 
 Github link: [<github Link>](https://github.com/dross725/Wingz)
 
-This 
-Dependencies:
-This application was created using VScode running Windows Subsytem for Linux using an Ubuntu.
+This application was created using VScode running Windows Subsytem for Linux using an Ubuntu, but was also tested in Windows 11.
 
-This application display a ride list api, which retrieves 
+This application display a ride list api, which retrieves data from a table named Ride.
+
+Steps in getting this project setup in your IDE.
+1. Clone the git repository:
+  git clone https://github.com/dross725/Wingz.git
+2. Check which branch you are in, it should return 'main':
+  git branch
+3. If you are not in 'main':
+  git checkout main
+4. Now do a git pull on the latest commit
+  git pull origin main
+
+
+At this point you already have a local copy of the code in your IDE. 
+5. Next will be installing the dependency needed by this application:
+  pip install -r requirements.txt
+6. Create Django migrations. Make sure you are the project directory.
+  python manage.py makemigrations
+7. Migrate the Django Models.
+  python manage.py migrate
+
+Now that dependencies are done, lets setup the initial user.
+One of the requirements of this assessment was an authentication where only users with an 'admin' role to have access to the api.
+That being said, one of the first thing I would do is to insert a user in the database with a role 'admin' to the shiny new database.
+To do this, a superuser will need to be created first by doing the command below and providing the relevant information.
+
+8. Create a superuser:
+  python manage.py createsuperuser
+
+9. The server needs to be running to be able to 
+
+
+  
