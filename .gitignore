@@ -1,0 +1,10 @@
+# .gitignore
+*.pyc
+__pycache__/
+db.sqlite3
+/staticfiles/
+/media/
+/env/
+*.log
+django_wingz/
+.git.old/

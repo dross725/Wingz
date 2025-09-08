@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Ride List{% endblock title %}
+
+{% block content %}
+    <form action="" method="get" id="ride_status_form">
+        Filter by status:
+        <select name="ride_status" id="ride_status" onchange="document.getElementById('ride_status_form').submit();">
+            <option value="">-- Select Status --</option>
+            {% for status in unique_statuses %}
+                <option value="{{ status }}" {% if request.GET.ride_status == status %}selected{% endif %}>
+                    {{ status }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+    <br>
+    <form method="get">
+        Filter by rider email:
+        <input type="text" name="rider_email" placeholder="Rider Email" value="{{ request.GET.rider_email }}">
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <form method="get">
+        Sort by distance based on given coordinates:
+        <input type="text" name="Longitude" placeholder="Longitude" value="{{ request.GET.Longitude }}">
+        <input type="text" name="Latitude" placeholder="Latitude" value="{{ request.GET.Latitude }}">
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <form method='get'>
+        Show todays rides only:
+        <input type="checkbox" name="today" value="true" {% if request.GET.today == 'true' %}checked{% endif %} onchange="this.form.submit()">
+    </form>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>Rider</th>
+                <th>Driver</th>
+                <th>Pickup Latitude</th>
+                <th>Pickup Longitude</th>
+                <th>Dropoff Latitude</th>
+                <th>Dropoff Longitude</th>
+                <th>
+                    <a href="?sort={% if request.GET.sort == 'pickup_time' %}-pickup_time{% else %}pickup_time{% endif %}">
+                        Pickup_time
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ride in ridelist %}
+                <tr>
+                    <td>{{ ride.id_ride }}</td>
+                    <td>{{ ride.status }}</td>
+                    <td>{{ ride.id_rider.first_name}}</td>
+                    <td>{{ ride.id_driver.first_name}}</td>
+                    <td>{{ ride.pickup_latitude }}</td>
+                    <td>{{ ride.pickup_longitude }}</td>
+                    <td>{{ ride.dropoff_latitude }}</td>
+                    <td>{{ ride.dropoff_longitude }}</td>
+                    <td>{{ ride.pickup_time }}</td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <br>
+    <!-- Pagination controls -->
+
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?{{ request.GET.urlencode }}&page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?{{ request.GET.urlencode }}&page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    
+{% endblock  %}
