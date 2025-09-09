@@ -5,5 +5,5 @@ urlpatterns = [
     path("", views.index, name='index'),
     path("login", views.login, name="login-page" ),
     path("ridelist", views.Ride_Listview.as_view(), name='ridelist-page'),
-    
+    path("populate_db", views.populate_db, name='populate-db'),
 ]

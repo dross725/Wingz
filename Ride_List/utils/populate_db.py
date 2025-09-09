@@ -1,5 +1,5 @@
 from faker import Faker
-from .models import Ride, User, Ride_Event
+from Ride_List.models import Ride, User, Ride_Event
 import random
 from django.utils.timezone import now
 
@@ -30,7 +30,7 @@ def populate_rider_db():
             pickup_time=pickup_time
         )
         ride.save() 
-        print(f"Ride created: {ride}")
+        #print(f"Ride created: {ride}")
 
 def populate_events():
 
@@ -58,4 +58,24 @@ def populate_events():
                 created_at=event_time
             )
             ride_event.save()
-            print(f"Event created for Ride {ride.id_ride}: {ride_event}")
+            #print(f"Event created for Ride {ride.id_ride}: {ride_event}")
+
+
+def  populate_user():
+    fake=Faker()
+    roles = ['Rider', 'Driver']
+    for _ in range(20):
+        fname = fake.first_name()
+        lname = fake.last_name()
+        email = fake.email()
+        role = random.choice(roles)
+        phone_number = fake.phone_number()
+        user = User(
+            role = role,
+            first_name = fname,
+            last_name = lname,
+            email = email,
+            phone_number = phone_number
+        )
+        user.save()
+        #print(f"User created: {user}")

@@ -7,6 +7,7 @@ from django.utils.timezone import now
 from datetime import timedelta
 from django.db.models import Case, When
 from .serializer import Ride_Serializer
+from .utils.populate_db import populate_rider_db, populate_events, populate_user
 
 debug = True
 
@@ -131,6 +132,13 @@ def login(request):
             return redirect('login-page')
 
     return render(request, 'Ride_List/login.html')
+
+
+def populate_db(request):
+    populate_rider_db()
+    populate_events()
+    populate_user()
+    return HttpResponse("Database populated with sample data.")
 
 
       
