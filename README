@@ -29,12 +29,34 @@ At this point you already have a local copy of the code in your IDE.
 Now that dependencies are done, lets setup the initial user.
 One of the requirements of this assessment was an authentication where only users with an 'admin' role to have access to the api.
 That being said, one of the first thing I would do is to insert a user in the database with a role 'admin' to the shiny new database.
+There are a couple of ways to do this, first is using the django shell via 'Python manage.py shell' or using the django admin.
+This readme file will be using the django admin interface.
 To do this, a superuser will need to be created first by doing the command below and providing the relevant information.
 
 8. Create a superuser:
   python manage.py createsuperuser
 
-9. The server needs to be running to be able to 
+9. The server needs to be running to be able to acces the django admin page. To start the server do:
+  python manage.py runserver <port number, default will be 8000>
+
+10. from your browser go to:
+  localhost:<port nummber>\admin
+
+This will ask you to login, and this is where you can use the superuser you have created above. After loging in you can now add a new user under the Ride_List model by clicking +Add buton.
+Note: Make sure you click the Users under the Ride_List model and not the one under the Authentication and Authorization model.
+
+11. After adding a new user, you can now go to localhost:<port number>/ridelist which should redirect you to a login page where you need to input the first name and last name of a user with an 'admin' role.
+
+
+Populating the database with dummy data using Faker
+I actually created a view that calls function that will populate the database with fake data. 20 Users data, 50 Ride data, Ride data length Ride Event data.
+
+
+
+
+
+
+
 
 
   
